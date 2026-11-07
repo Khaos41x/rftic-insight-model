@@ -4,7 +4,7 @@ SHA-256 digests cover the distributed bytes. Dates refer to recorded generation 
 
 | File | Bytes | SHA-256 | Date | Description |
 | --- | ---: | --- | --- | --- |
-| [paper/main.pdf](paper/main.pdf) | 697574 | `9a643e08ae68fb0dfa5e67abfc24691450f09a4705e80b7bd33f45ab81fda680` | 2026-11-07 | Main manuscript PDF |
+| [paper/main.pdf](paper/main.pdf) | 722993 | `2fb627a4dbf6c536ad15e85e33c0e7c751328c0c74a56510194e11da5bc54d49` | 2026-11-07 | Main manuscript PDF |
 | [paper/supplementary.pdf](paper/supplementary.pdf) | 292715 | `555474053c8cb82f031c74170566330fd2c711a7d2fbc8e9b60f661c7c635bf6` | 2026-11-07 | Supplementary Information PDF |
 | [data/final_sweep_data_CORRECTED_CI.csv](data/final_sweep_data_CORRECTED_CI.csv) | 6690 | `d6e6799b1454b38af2e987e64da442626fc5cd70049286c229fe4b0d4c1268c2` | 2026-10-11 | Canonical sweep summary with post-truncation CIs |
 | [data/final_sweep_seeds.json](data/final_sweep_seeds.json) | 1406 | `23a0c27a80483025402defec6bf5700aeb69c34d57c54c582b83a5b7238a5838` | — | Archived production seed registry |
