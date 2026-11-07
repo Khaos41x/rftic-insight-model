@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software or its data, please cite the RFTIC manuscript and this repository."
+title: "RFTIC Insight Model"
+type: software
+authors:
+  - given-names: Miguel
+    family-names: Marmore
+repository-code: "https://github.com/Khaos41x/rftic-insight-model"
+license: MIT
+version: "1.0.0"

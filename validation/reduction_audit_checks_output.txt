@@ -1,0 +1,75 @@
+==============================================================================
+CHECK 1 (symbolic): series of the saturation integral and reduced coefficients
+==============================================================================
+dF/dz - atanh(z) = 0
+series F(z): z**2/2 + z**4/12 + z**6/30 + z**8/56 + O(z**9)
+coef x^2: (v1**2 + v2**2 + v3**2)/2 | coef x^4: (v1**4 + v2**4 + v3**4)/12 | coef x^6: (v1**6 + v2**6 + v3**6)/30
+
+==============================================================================
+CHECK 2 (symbolic): normal form U = g x^4/12 - mu x^2/2: wells, barrier, curvatures
+==============================================================================
+critical points: [0, -sqrt(3)*sqrt(mu)/sqrt(g), sqrt(3)*sqrt(mu)/sqrt(g)]
+Delta E = 3*mu**2/(4*g) | U''(0) = -mu | U''(x+) = 2*mu
+Kramers k = sqrt(2)*mu*exp(-3*mu**2/(4*T*g))/(2*pi)
+M = 2 x+ = 2*sqrt(3)*sqrt(mu)/sqrt(g)
+
+==============================================================================
+CHECK 3 (symbolic): rescaling. y = sqrt(g/mu) x, s = mu t  ->  dy = -(y^3/3 - y) ds + sqrt(3/(2r)) dW
+==============================================================================
+drift per ds: -y**3/3 + y | noise coefficient: sqrt(6)/(2*sqrt(r))   (= sqrt(3/(2r)))
+theta = g T / mu^2 = 3/(4*r)   (= 3/(4r) = 0.75/r)
+kappa = k/mu = sqrt(2)*exp(-r)/(2*pi)
+
+==============================================================================
+CHECK 4 (numeric): action of the Hebbian term on v* and on u (random orthonormal a,b)
+==============================================================================
+eps=0.1: ||Wt v + eps v|| = 3.1e-17 ; ||Wt u - eps u|| = 2.6e-17   (v: -eps, u: +eps)
+eps=0.7: ||Wt v + eps v|| = 1.7e-16 ; ||Wt u - eps u|| = 2.0e-16   (v: -eps, u: +eps)
+
+==============================================================================
+CHECK 5 (numeric): partial minimization over transverse directions (A2 holds), N=60
+==============================================================================
+g = 0.043978, h = 2.650317e-03, |P_perp v^3|^2 = 7.162259e-04 (= h - g^2 = 7.162259e-04)
+transverse spectral gap gamma = 0.652;  c6 = h/30 - q^T A^-1 q/18 = 4.962294e-05  (h/30 = 8.834389e-05)
+
+Expansion check at mu = 0.03: R(x) = U(x) - (-mu x^2/2 + g x^4/12);  R/x^6 should approach c6
+  x=0.10: R/x^6 =  4.9631e-05   (c6 = 4.9623e-05) ; |y*| = 8.83e-06 (O(x^3): |y*|/x^3 = 8.826e-03)
+  x=0.15: R/x^6 =  4.9641e-05   (c6 = 4.9623e-05) ; |y*| = 2.98e-05 (O(x^3): |y*|/x^3 = 8.827e-03)
+  x=0.20: R/x^6 =  4.9656e-05   (c6 = 4.9623e-05) ; |y*| = 7.06e-05 (O(x^3): |y*|/x^3 = 8.828e-03)
+  x=0.30: R/x^6 =  4.9697e-05   (c6 = 4.9623e-05) ; |y*| = 2.38e-04 (O(x^3): |y*|/x^3 = 8.831e-03)
+
+Barrier: exact (partial minimization) vs normal form vs first-order correction -36 c6 mu/g^2
+     mu |    DE exact  3mu^2/(4g)  rel.err |  pred. -36 c6 mu/g^2 |  line-only (S=xv) DE
+  0.005 |    0.000424    0.000426    0.46% |               -0.46% |             0.000423
+  0.010 |    0.001690    0.001705    0.92% |               -0.92% |             0.001678
+  0.020 |    0.006698    0.006822    1.85% |               -1.85% |             0.006602
+  0.050 |    0.040755    0.042635    4.61% |               -4.62% |             0.039329
+(rel.err = (normal form - exact)/exact; the first-order prediction is the fractional change of the exact barrier)
+
+==============================================================================
+CHECK 6 (numeric): transverse strong convexity of E on the cube (consequence of A2)
+==============================================================================
+min over 2000 random S in the cube of lambda_min(H_perp,perp) = 0.7308  >= gamma = 0.6519
+
+==============================================================================
+CHECK 7 (numeric): A2 is NOT satisfied by symmetric two-pattern Hebbian storage W0 = c(aa^T + bb^T)
+==============================================================================
+eps=0.00: lambda_W(eps) = v^T W v = 1.200 (= c - eps) ; u^T W u = 1.200 (= c + eps > 1)
+eps=0.05: lambda_W(eps) = v^T W v = 1.150 (= c - eps) ; u^T W u = 1.250 (= c + eps > 1)
+eps=0.10: lambda_W(eps) = v^T W v = 1.100 (= c - eps) ; u^T W u = 1.300 (= c + eps > 1)
+-> transverse eigenvalue c+eps exceeds 1: no spectral gap; the 1-D reduction is not justified in this example.
+Necessary condition for A2 on [0, eps_max]:  u^T W0 u + eps_max <= 1 - gamma.
+
+==============================================================================
+CHECK 8 (numeric): when A2 FAILS (symmetric two-pattern storage, c = 1.2), do the wells along v* stay minima of the full energy?
+==============================================================================
+W0 = c(aa^T + bb^T), c = 1.2 (mu0 = 0.20); S = x v* exact (flat patterns, |S_i| = s); H = -W + diag(1/(1-S^2))
+   eps |       s |     H_vv     H_uu | verdict
+  0.02 |  0.6341 |   0.4924   0.4524 | local minimum of full energy
+  0.05 |  0.5922 |   0.3900   0.2900 | local minimum of full energy
+  0.08 |  0.5422 |   0.2964   0.1364 | local minimum of full energy
+  0.10 |  0.5029 |   0.2386   0.0386 | local minimum of full energy
+  0.12 |  0.4573 |   0.1844  -0.0556 | SADDLE of full energy
+  0.15 |  0.3707 |   0.1093  -0.1907 | SADDLE of full energy
+  0.19 |  0.1717 |   0.0204  -0.3596 | SADDLE of full energy
+-> A2 is sufficient for the clean reduction, not necessary for the wells to be minima; but in this example the wells along v* stop being minima of the full energy for eps between 0.10 and 0.12 (about mu0/2), so the 1-D picture breaks down.

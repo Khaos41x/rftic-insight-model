@@ -1,0 +1,7 @@
+# Preserve archive bytes and SHA-256 digests across checkout platforms.
+data/** -text
+data/*.csv whitespace=cr-at-eol
+figures/*.png -text
+paper/*.pdf -text
+paper/*.bib -text whitespace=-blank-at-eof
+validation/reduction_audit_checks_output.txt -text

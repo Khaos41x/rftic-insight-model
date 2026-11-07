@@ -1,0 +1,185 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{pdflscape}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Supplementary Information for The Architecture of Insight: A Reduced-Model Hypothesis for Representational Flexibility and Insight Capacity}}
+
+\pagestyle{plain}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Supplementary Information}
+\end{center}
+
+\section*{Supplementary Note S1. Transverse minimization and slaving}
+
+Let $v^*$ be the normalized contrastive eigenvector, let
+$V_\perp=\{w:w^Tv^*=0\}$, and write $S=xv^*+y$ with $y\in V_\perp$. For fixed
+$\varepsilon$, define
+\[
+A:=\bigl(I-W(\varepsilon)\bigr)\big|_{V_\perp},\qquad
+q:=P_\perp (v^*)^{\circ3},
+\]
+where $P_\perp$ is the orthogonal projector onto $V_\perp$ and the superscript
+$\circ3$ denotes componentwise cubing. Hypothesis (A2) gives $A\succeq\gamma I$.
+
+For the continuous Hopfield energy
+\[
+E(S)=-\frac12S^TW(\varepsilon)S+\sum_i F(S_i),\qquad
+F'(z)=\tanh^{-1}(z),
+\]
+the Hessian is $H(S)=-W(\varepsilon)+D(S)$, with
+$D(S)=\operatorname{diag}((1-S_i^2)^{-1})\succeq I$. Therefore, for every
+$w\in V_\perp$ inside the activation cube,
+\[
+w^TH(S)w\geq\gamma\lVert w\rVert^2.
+\]
+The energy is thus uniformly strongly convex on each transverse slice, so that
+the slice has at most one minimizer. At $(x,y)=(0,0)$ the transverse stationarity
+equation has derivative $A$, and the implicit function theorem supplies a unique
+smooth branch $y^*(x)$ locally. Because $E(-S)=E(S)$, uniqueness implies
+$y^*(-x)=-y^*(x)$.
+
+Projecting the stationarity equation onto $V_\perp$ and using
+$W(\varepsilon)v^*=\lambda_W(\varepsilon)v^*$ gives
+\[
+0=P_\perp\nabla E(xv^*+y)
+=Ay+\frac{x^3}{3}q+O(x^2\lVert y\rVert+\lVert y\rVert^3+x^5).
+\]
+Consequently,
+\[
+\boxed{y^*(x)=-\frac{x^3}{3}A^{-1}q+O(x^5)},
+\qquad
+\lVert y^*(x)\rVert
+\leq\frac{|x|^3\sqrt{h-g^2}}{3\gamma}+O(x^5),
+\]
+where $g=\sum_i(v_i^*)^4$, $h=\sum_i(v_i^*)^6$, and
+$\lVert q\rVert^2=h-g^2$. This proves the slaving statement used in the main
+text. It also shows explicitly why transverse minimization first affects the
+reduced energy at order $x^6$.
+
+\section*{Supplementary Note S2. Sextic coefficient and normal-form barrier}
+
+On the line $S=xv^*$, the saturation expansion is
+\[
+\sum_i F(xv_i^*)
+=\frac{x^2}{2}+\frac{g}{12}x^4+\frac{h}{30}x^6+O(x^8).
+\]
+Combining this with the bilinear term and
+$\mu(\varepsilon)=\lambda_W(\varepsilon)-1$ gives
+\[
+E(xv^*)=-\frac{\mu}{2}x^2+\frac{g}{12}x^4+\frac{h}{30}x^6+O(x^8).
+\]
+For $y=O(x^3)$, the terms needed through order $x^6$ are
+\[
+E(xv^*+y)=E(xv^*)+\frac{x^3}{3}y^Tq+\frac12y^TAy+O(x^8).
+\]
+Minimization in $y$ inserts $y=-(x^3/3)A^{-1}q+O(x^5)$ and yields
+\[
+U(x;\varepsilon)
+=-\frac{\mu}{2}x^2+\frac{g}{12}x^4+c_6x^6+O(x^8),
+\qquad
+\boxed{c_6=\frac{h}{30}-\frac1{18}q^TA^{-1}q}.
+\]
+Since $0\preceq A^{-1}\preceq\gamma^{-1}I$ on $V_\perp$,
+\[
+\frac{h}{30}-\frac{h-g^2}{18\gamma}
+\leq c_6\leq\frac{h}{30}.
+\]
+The Level-B model used for the dynamical analysis discards the sextic and higher
+terms:
+\[
+U_{\mathrm{nf}}(x;\varepsilon)=\frac{g}{12}x^4-\frac{\mu}{2}x^2.
+\]
+Its wells and barrier are
+\[
+x_\pm=\pm\sqrt{\frac{3\mu}{g}},\qquad
+\Delta E_{\mathrm{nf}}=\frac{3\mu^2}{4g}.
+\]
+Treating $c_6x^6$ perturbatively gives the leading relative correction
+\[
+\frac{\Delta E-\Delta E_{\mathrm{nf}}}{\Delta E_{\mathrm{nf}}}
+=-\frac{36c_6}{g^2}\mu+O(\mu^2).
+\]
+These statements concern the near-bifurcation asymptotic energy reduction. The
+one-dimensional stochastic dynamics used in the production sweep additionally
+assume adiabatic transverse slaving and do not quantify noise-induced
+renormalization from transverse fluctuations.
+
+\section*{Supplementary verification note}
+
+The supplied deterministic symbolic and numerical audit reproduced all eight
+reported sanity checks without differences from its archived output. The checks
+covered the saturation series, normal-form stationary points and barrier,
+canonical rescaling, the actions of the Hebbian perturbation on $v^*$ and $u$,
+the $x^6$ slaving coefficient, transverse convexity, and a counterexample in
+which (A2) fails. These are consistency checks, not formal verification; no proof
+assistant was used.
+
+\clearpage
+\begin{landscape}
+
+\begin{center}
+{\large\bfseries Supplementary Table S1. Complete production sweep}
+\end{center}
+
+\vspace{0.5em}
+
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}rrrrrrrrrrrrrrrr@{}}
+\toprule
+$r$ & Seed & $n$ & Events &
+$\kappa_{\rm sim}$ & CI low & CI high &
+$\kappa_{\rm exact}$ & $\kappa_K$ &
+Err. exact & Err. $K$ &
+$\log(S/E)$ & $\log(S/K)$ & $\log(E/K)$ &
+Est. diff. (\%) & $t^*$\\
+\midrule
+0.1500 & 77000 & 6000 & 6000 & 0.51535 & 0.44072 & 0.60261 & 0.44985 & 0.19373 & 0.1456 & 1.6602 & 0.1359 & 0.9784 & 0.8425 & 22.856 & 8.00\\
+0.1938 & 87000 & 6000 & 6000 & 0.39050 & 0.38043 & 0.40084 & 0.35971 & 0.18542 & 0.0856 & 1.1060 & 0.0821 & 0.7448 & 0.6626 & 12.990 & 0.50\\
+0.2504 & 97000 & 6000 & 6000 & 0.31389 & 0.30541 & 0.32261 & 0.28629 & 0.17522 & 0.0964 & 0.7914 & 0.0920 & 0.5830 & 0.4910 & 15.080 & 1.00\\
+0.3235 & 107000 & 6000 & 6000 & 0.23487 & 0.22894 & 0.24094 & 0.22653 & 0.16287 & 0.0368 & 0.4421 & 0.0361 & 0.3661 & 0.3299 & 9.847 & 0.50\\
+0.4180 & 117000 & 6000 & 6000 & 0.18619 & 0.18153 & 0.19098 & 0.17788 & 0.14819 & 0.0468 & 0.2565 & 0.0457 & 0.2283 & 0.1826 & 8.615 & 0.50\\
+0.5400 & 127000 & 6000 & 6000 & 0.14068 & 0.13716 & 0.14429 & 0.13823 & 0.13116 & 0.0177 & 0.0726 & 0.0176 & 0.0701 & 0.0525 & 6.832 & 0.50\\
+0.6977 & 137000 & 6000 & 6000 & 0.11418 & 0.11130 & 0.11713 & 0.10586 & 0.11202 & 0.0786 & 0.0192 & 0.0756 & 0.0191 & $-0.0566$ & 9.850 & 1.00\\
+0.9015 & 147000 & 6000 & 6000 & 0.08287 & 0.08079 & 0.08500 & 0.07936 & 0.09137 & 0.0442 & 0.0931 & 0.0433 & $-0.0977$ & $-0.1410$ & 7.696 & 1.00\\
+1.1647 & 157000 & 6000 & 5999 & 0.06265 & 0.06106 & 0.06427 & 0.05764 & 0.07023 & 0.0869 & 0.1079 & 0.0833 & $-0.1142$ & $-0.1975$ & 9.838 & 2.00\\
+1.5049 & 167000 & 6000 & 5992 & 0.04246 & 0.04139 & 0.04356 & 0.03991 & 0.04998 & 0.0640 & 0.1504 & 0.0620 & $-0.1630$ & $-0.2250$ & 7.234 & 2.00\\
+1.9443 & 177000 & 6000 & 5903 & 0.02664 & 0.02597 & 0.02733 & 0.02573 & 0.03221 & 0.0357 & 0.1727 & 0.0350 & $-0.1896$ & $-0.2246$ & 2.691 & 1.00\\
+2.5121 & 187000 & 6000 & 5400 & 0.01506 & 0.01466 & 0.01547 & 0.01492 & 0.01825 & 0.0094 & 0.1751 & 0.0094 & $-0.1925$ & $-0.2018$ & 1.673 & 1.00\\
+3.2456 & 197000 & 6000 & 4044 & 0.00739 & 0.00717 & 0.00762 & 0.00743 & 0.00877 & 0.0051 & 0.1568 & $-0.0052$ & $-0.1706$ & $-0.1654$ & 0.000 & 0.00\\
+4.1934 & 207000 & 6000 & 2144 & 0.00293 & 0.00281 & 0.00306 & 0.00300 & 0.00340 & 0.0222 & 0.1378 & $-0.0225$ & $-0.1483$ & $-0.1258$ & 0.000 & 0.00\\
+5.4179 & 217000 & 6000 & 788 & 0.00094 & 0.00087 & 0.00100 & 0.00091 & 0.00100 & 0.0263 & 0.0633 & 0.0259 & $-0.0654$ & $-0.0914$ & 0.000 & 0.00\\
+7.0000 & 227000 & 6000 & 171 & 0.000193 & 0.000166 & 0.000225 & 0.000192 & 0.000205 & 0.0061 & 0.0578 & 0.0061 & $-0.0596$ & $-0.0656$ & 0.339 & 0.50\\
+\bottomrule
+\end{tabular}
+}%
+\end{center}
+
+\vspace{0.5em}
+\footnotesize
+\textit{Notes.} $S$, $E$, and $K$ denote stabilized simulation, numerically evaluated exact
+one-dimensional MFPT rate, and Kramers asymptotic rate. The relative differences in the
+\textup{Err.} columns are absolute. The estimator difference is $100\,|S-S_0|/S_0$, where
+$S_0$ is the simulation hazard estimate from $t=0$ without truncation. Confidence intervals
+use the post-truncation event count selected by the same hazard-stabilization procedure as the
+central estimate. Values are rounded for display; machine-precision values are available in
+\texttt{data/final\_sweep\_data\_CORRECTED\_CI.csv}.
+
+\end{landscape}
+
+\end{document}
